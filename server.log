@@ -1,0 +1,5 @@
+[dotenv@17.2.3] injecting env (5) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+✅ PostgreSQL Connected via Sequelize
+✅ Database Synced
+Server started on port 5000
