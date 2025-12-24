@@ -81,3 +81,9 @@ exports.login = (req, res, next) => {
         });
     })(req, res, next);
 };
+
+// Validate Token
+exports.validateToken = (req, res) => {
+    // If the middleware passed, the token is valid and req.user is set
+    res.json({ valid: true, user: req.user });
+};
