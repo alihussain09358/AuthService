@@ -22,9 +22,9 @@ const UserPlatform = sequelize.define(
 
     // e.g. "auth_provider" (google, facebook) or "application" (mobile_app, web_dashboard)
     platform_type: {
-      type: DataTypes.ENUM('web', 'mobile'),
+      type: DataTypes.ENUM("web", "mobile"),
       allowNull: false,
-      defaultValue: 'web',
+      defaultValue: "web",
     },
 
     // The specific provider/source name: "google", "github", "internal_crm"
