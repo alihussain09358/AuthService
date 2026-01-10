@@ -3,6 +3,11 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { connectDB, sequelize } = require('./config/db');
 
+// Load .env.local only if strictly NOT in production
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: '.env.local' });
+}
+// Always load .env (defaults/prod)
 dotenv.config();
 
 const app = express();

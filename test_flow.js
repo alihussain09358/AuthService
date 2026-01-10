@@ -65,6 +65,7 @@ async function runTests() {
 
     } catch (err) {
         console.error('TEST FAILED:', err.response ? JSON.stringify(err.response.data, null, 2) : err.message);
+        if (err.stack) console.error(err.stack);
         process.exit(1);
     }
 }

@@ -39,4 +39,11 @@ const decrypt = (encryptedHex) => {
     }
 };
 
+// const key = forge.random.getBytesSync(32);
+
+// // Encode for storage (base64 or hex)
+// const base64Key = forge.util.encode64(key);
+
+// console.log(base64Key)
+
 module.exports = { encrypt, decrypt };

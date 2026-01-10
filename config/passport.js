@@ -21,9 +21,12 @@ passport.deserializeUser(async (id, done) => {
 
 // Local Strategy
 passport.use(new LocalStrategy({
-    usernameField: 'email', 
-}, async (email, password, done) => {
+    usernameField: 'email',
+    passReqToCallback: true  // Pass request to callback to access app_slug
+}, async (req, email, password, done) => {
     try {
+        const { app_slug, platform_type, provider } = req.body;
+        
         const user = await User.findOne({ where: { email } });
         if (!user) {
             return done(null, false, { message: 'Invalid Credentials' });
@@ -37,6 +40,23 @@ passport.use(new LocalStrategy({
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return done(null, false, { message: 'Invalid Credentials' });
+        }
+
+        // Verify user has access to this app_slug
+        if (app_slug) {
+            const { UserPlatform } = require('../models');
+            const userPlatform = await UserPlatform.findOne({
+                where: {
+                    user_id: user.id,
+                    app_slug: app_slug,
+                    platform_type: platform_type || 'web',
+                    provider: provider || 'local'
+                }
+            });
+
+            if (!userPlatform) {
+                return done(null, false, { message: 'User does not have access to this application' });
+            }
         }
 
         return done(null, user);
