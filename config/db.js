@@ -1,4 +1,12 @@
 const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
+
+// Load .env.local only if strictly NOT in production
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: '.env.local' });
+}
+// Always load .env (defaults/prod)
+dotenv.config();
 
 const DATABASE_URL =
   process.env.DATABASE_URL ||
