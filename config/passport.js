@@ -65,7 +65,9 @@ passport.use(new LocalStrategy({
     }
 }));
 
-// Google Strategy
+// Google OAuth Strategy - COMMENTED OUT (Using token-based verification instead)
+// If you need the traditional OAuth redirect flow, uncomment this section
+/*
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -131,5 +133,6 @@ passport.use(new GoogleStrategy({
         done(err, null);
     }
 }));
+*/
 
 module.exports = passport;

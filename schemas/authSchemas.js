@@ -21,7 +21,15 @@ const loginSchema = z.object({
     meta_data: z.string().optional(),
 });
 
+const googleAuthSchema = z.object({
+    credential: z.string().min(1, 'Google credential token is required'),
+    app_slug: z.string().min(1, 'App slug is required'),
+    platform_type: z.string().optional().default('web'),
+    provider: z.string().optional().default('google'),
+});
+
 module.exports = {
     registerSchema,
     loginSchema,
+    googleAuthSchema,
 };

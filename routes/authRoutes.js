@@ -3,8 +3,8 @@ const router = express.Router();
 const auth = require('../middleware/authMiddleware');
 const validate = require('../middleware/validate');
 const passport = require('passport');
-const { register, login, validateToken } = require('../controllers/authController');
-const { registerSchema, loginSchema } = require('../schemas/authSchemas');
+const { register, login, validateToken, googleAuth } = require('../controllers/authController');
+const { registerSchema, loginSchema, googleAuthSchema } = require('../schemas/authSchemas');
 
 // @route   POST api/auth/register
 // @desc    Register user
@@ -16,18 +16,10 @@ router.post('/register', validate(registerSchema), register);
 // @access  Public
 router.post('/login', validate(loginSchema), login);
 
-// @route   GET api/auth/google
-// @desc    Google auth
+// @route   POST api/auth/google
+// @desc    Google token-based authentication
 // @access  Public
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// @route   GET api/auth/google/callback
-// @desc    Google auth callback
-// @access  Public
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    // Successful authentication, redirect home or send token
-    res.redirect('/'); 
-});
+router.post('/google', validate(googleAuthSchema), googleAuth);
 
 // @route   GET api/auth/validate
 // @desc    Validate access token
