@@ -93,7 +93,12 @@ exports.login = (req, res, next) => {
 // Validate Token
 exports.validateToken = (req, res) => {
     // If the middleware passed, the token is valid and req.user is set
-    res.json({ valid: true, user: req.user });
+    res.json({ 
+        valid: true, 
+        app_slug: req.app_slug,
+        platform_type: req.platform_type,
+        provider: req.provider
+    });
 };
 
 // Google Authentication (Token-based)
